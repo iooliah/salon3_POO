@@ -1,0 +1,39 @@
+CERINTE: Precizari pentru efectuarea temei 2 (preluare din https://github.com/mcmarius/oop-template)
+
+1. separati codului din clase in fisiere header si sursea) Nu scrieti tot codul direct în clasă, ci folositi "split into declaration and definition" (fisierele <clasa>.h contin (doar) signaturile functiilor, iar cele <clasa>.cpp implementarile functiilor) => fara #include in <clasa>.h. 
+
+b) Clasele mici și legate între ele se pot afla în aceeași pereche de fișiere header-sursă2. 
+mosteniria.minim o clasă de bază și 3 clase derivate din aceeași ierarhie; cele 3 derivate moștenesc aceeași clasă de bază (vezi diagrama de la https://github.com/mcmarius/poo/blob/master/colocviu/ian2026.md )
+
+b.ierarhia trebuie să fie cu bază proprie, nu derivată dintr-o clasă predefinită
+c. Functii virtuale, functii virtuale pure. Funcții virtuale (pure) apelate prin pointeri de bază din clasa care conține atributul de tip pointer de bază1) minim o funcție virtuală va fi specifică temei (i.e. nu simple citiri/afișări sau preluate din biblioteci i.e. draw/update/render)
+
+2. afișare virtuală, interfață non-virtualăd.apelarea constructorului din clasa de bază din constructori din derivatee.clasă cu atribut de tip pointer la o clasă de bază cu derivate; aici apelați funcțiile virtuale prin pointer de bază, eventual prin interfața non-virtuală din bază 
+
+	1) suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
+
+	2) dynamic_cast/std::dynamic_pointer_cast pentru downcast cu sens
+
+	3) Folosiți std::string în loc de char*, folosiți std::vector în loc de A *vec = new A[nr] (și delete[]).
+
+	4) Recomandare: folosiți std::shared_ptr pentru a evita eventuale memory leaks.
+
+3. exceptiia.ierarhie proprie cu baza std::exception sau derivată din std::exception; minim 3 clase pentru erori specifice distincte. clasele de excepții trebuie să trateze categorii de erori distincte (exemplu de erori echivalente: citire fișiere cu diverse extensii)
+
+b.utilizare cu sens: de exemplu, throw în constructor (sau funcție care întoarce un obiect), try/catch în main
+
+4. date si functii statice
+
+5. const
+
+6. functii de nivel inalt: de eliminat cât mai mulți getters/setters/funcții low-level
+
+7. operator <<
+
+8. NU folositi (prea multe) citiri de la tastatura. (Salvati date intr-un fisier text din care sa le copiati rapid). Puteti folosi fisiere pentru seturi de date de intrare (recomandat mai multe fisiere, fiecare cu un set specific, de exemplu fisier cu date studenti/ angajati, separat de fisier cu date facultati/ departamente).
+
+9. fisier README in care detaliati:a) enuntul problemei (ce se da, ce se cere - pe modelul subiectelor de colocviu, in mai multe de doua fraze! b) modul de rezolvare (urmariti si cerintele/ grila de evaluare).
+
+10. Orice resursa utilizata trebuie inclusa in Bibliografie.
+
+11. Fara variabile globale. Fara atribute publice. Fara cod de umplutură / cod fără sens. Fara copy-paste. 

@@ -1,0 +1,20 @@
+Ionescu Maria Georgescu Mihnea COAFOR 10.06 09:30 CASH 1 lung
+Dumitrescu Elena Marin Andreea COSMETICA 10.06 10:00 TRANSFER 1 facial
+Belcean Marisa Vasile Ioana PEDICHIURA 10.06 10:30 CARD 0 1 1
+Borosici Elisa Ionescu Vlad COAFOR 10.06 11:00 CARD 0 mediu
+Enescu Ema Popa Raluca MANICHIURA 10.06 11:30 CASH 1 0 1
+Barbu Victoria Georgescu Mihnea COAFOR 10.06 12:00 CARD 1 lung
+Toderici Iuliana Dumitru Ana COSMETICA 10.06 12:30 TRANSFER 1 corp
+Stan Alexandra Vasile Ioana PEDICHIURA 10.06 13:00 CARD 1 1 0
+Matei Bianca Ionescu Vlad COAFOR 10.06 13:30 CASH 0 scurt
+Radu Cristina Marin Andreea COSMETICA 11.06 09:00 CARD 0 facial
+Neagu Diana Popa Raluca MANICHIURA 11.06 09:30 CARD 1 1 1
+Ilie Gabriela Georgescu Mihnea COAFOR 11.06 10:00 CASH 0 mediu
+Popescu Ana Dumitru Ana PEDICHIURA 11.06 10:30 CARD 0 1 1
+Ionescu Maria Ionescu Vlad COAFOR 11.06 11:00 TRANSFER 1 lung
+Dumitrescu Elena Marin Andreea COSMETICA 11.06 11:30 CARD 1 par
+Belcean Marisa Vasile Ioana MANICHIURA 10.06 12:00 CASH 1 0 1
+Borosici Elisa Georgescu Mihnea PEDICHIURA 11.06 12:30 CARD 1 1 1
+Enescu Ema Ionescu Vlad COAFOR 11.06 13:00 TRANSFER 1 lung
+Barbu Victoria Marin Andreea COSMETICA 11.06 13:30 CARD 1 corp
+Enescu Ema Popa Raluca MANICHIURA 11.09 10 CARD
