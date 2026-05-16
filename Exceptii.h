@@ -2,28 +2,62 @@
 #define EXCEPTII_H
 #include <stdexcept>
 #include <string>
+#include <vector>
 
-//clasa de baza pentru toate exceptiile
-class SalonExceptii : public std::runtime_error{
+class Client;
+class Angajat;
+class Programare;
+
+class SalonExceptii : public std::runtime_error{            //clasa de baza pentru toate exceptiile
 public:
     explicit SalonExceptii(const std::string& mesaj);
 };
-
-class ClientInexistentExceptie : public SalonExceptii{     //exceptie cand clientul nu este gasit
-public:
-    ClientInexistentExceptie();
-};
-
-class AngajatInexistentExceptie : public SalonExceptii{     //exceptie cand angajatul nu este gasit sau selectat gresit
-public:
-    AngajatInexistentExceptie();
-};
-
-class ProgramareInvalidaExceptie : public SalonExceptii{     //exceptie pentru programari invalide(exp: ora ocupata, fara angajat disponibil)
+class ProgramareInvalidaExceptie : public SalonExceptii{        //exceptie pentru programari invalide
 public:
     explicit ProgramareInvalidaExceptie(const std::string& mesaj);
 };
 
 
+template <typename T>                   //functie template care intoarce numele
+std::string numeEntitate();
 
-#endif
+template <>
+inline std::string numeEntitate<Client>(){
+    return "client";
+}
+template <>
+inline std::string numeEntitate<Angajat>(){
+    return "angajat";
+}
+template <>
+inline std::string numeEntitate<Programare>(){
+    return "programare";
+}
+
+//clasa template care generealizeaza exceptiile de tip "persoana inexistenta"
+template <typename T>
+class EntitateInexistentaExceptie : public SalonExceptii{
+private:
+    std::string criteriu_;
+    std::vector<T> sugestii_;       //atribut dependent de T
+
+public:
+    //construiesc mesajul exceptiei in functie de tipul T
+    explicit EntitateInexistentaExceptie(const std::string& criteriu = "") : SalonExceptii("Nu exista " + numeEntitate<T>() + ": " + criteriu), criteriu_(criteriu) {}
+
+    const std::string& getCriteriu() const{
+        return criteriu_;
+    }
+    const std::vector<T>& getSugestii() const{         //functie membru care depinde de T
+        return sugestii_;
+    }
+    int numarSugestii() const{
+        return static_cast<int>(sugestii_.size());
+    }
+};
+
+//pastrez numele vechi din proiect
+using ClientInexistentExceptie  = EntitateInexistentaExceptie<Client>;
+using AngajatInexistentExceptie = EntitateInexistentaExceptie<Angajat>;
+
+#endif // EXCEPTII_H
