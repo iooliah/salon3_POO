@@ -87,12 +87,45 @@ Pentru design patterns, am implementat trei exemple:
 
 SalonSingleton este un Singleton de tip Meyers care contine configurarile globale ale salonului: preturile de baza pentru fiecare serviciu, duratele de baza, data aniversara, reducerile aplicate in caz de programari multiple. Acest Singleton inlocuieste functiile libere pretFix() si durataFixa() care erau in main si aduce intr-un singur loc datele proiectului.
 
-ServiciuFactory este un Factory care inlocuieste codul de if/else pentru crearea serviciilor concrete. In proiectul 2, aceeeasi bucata de cod cu 4 ramuri (Manichiura/Pedichiura/Coafor/Cosmetica) aparea de doua ori in main: o data la citirea programarilor din fisier si o data la adaugarea interactiva de la tastatura. ServiciuFactory creeaza doua metode statice (creeazaDinFisier, creeazaInteractiv) care inlocuiesc repetivitatea. De exemplu, daca in viitor voi adauga un serviciu nou, modific doar Factory-ul si adaug clasa derivata, nu si main-ul (principiul Open/Closed din SOLID).
+ServiciuFactory este un Factory care inlocuieste codul de if/else pentru crearea serviciilor concrete. In proiectul 2, aceeeasi bucata de cod cu 4 ramuri (Manichiura/Pedichiura/Coafor/Cosmetica) aparea de doua ori in main: o data la citirea programarilor din fisier si o data la adaugarea interactiva de la tastatura. ServiciuFactory contine doua metode statice (creeazaDinFisier, creeazaInteractiv) care inlocuiesc repetivitatea. De exemplu, daca in viitor voi adauga un serviciu nou, modific doar Factory-ul si adaug clasa derivata, nu si main-ul (principiul Open/Closed din SOLID).
 
 ProgramareBuilder permite constructia unei Programari prin method chaining: builder.client(c).angajat(a).serviciu(s).data(d).ora(o).tipPlata(p).build(). Avantajele sunt ca argumentele sunt etichetate clar si nu mai trebuie sa retin pozitia exacta a fiecaruia in constructorul cu 6 parametri si ca validarea se face intr-un singur loc, in build(), care arunca ProgramareInvalidaExceptie daca lipseste vreun camp. Builder-ul foloseste std::optional pentru a sti daca un camp a fost setat sau nu.
 
 In main.cpp am inlocuit: std::vector<...> cu Catalog<...>, functiile libere cautaClient si cautaAngajat cu Catalog::cauta(lambda, criteriu) care cere un predicat lambda si arunca direct EntitateInexistentaExceptie<T> daca nu gaseste, functiile pretFix si durataFixa cu apeluri prin Singleton-ul SalonSingleton, blocul de if/else pentru servicii cu un singur apel Factory, si programari.emplace_back() prin Builder. In plus, am adaugat catch-uri specializate pentru EntitateInexistentaExceptie<Client> si EntitateInexistentaExceptie<Angajat> in main, ca sa se vada vizibil ca exceptia template este folosita activ in aplicatie.
 
+## Principiile SOLID
+
+SOLID este un set de 5 principii de proiectare orientata pe obiecte care ne ajuta sa scriem cod usor de intretinut si extins.
+
+S - Single Responsibility Principle (fiecare clasa are o singura responsabilitate):
+- Persoana/Client/Angajat modeleaza doar entitatea persoana
+- Serviciu si derivatele calculeaza doar pretul si durata propriilor servicii
+- Programare doar leaga entitati si calculeaza costul final
+- Catalog<T> doar stocheaza si cauta
+- SalonSingleton doar tine configurari globale
+- ServiciuFactory doar creeaza servicii
+- ProgramareBuilder doar construieste programari
+Inainte de proiectul 3, main-ul meu avea aceste responsabilitati amestecate.
+
+O - Open/Closed Principle:
+- Adaugarea unui serviciu nou presupune crearea unei clase derivate din Serviciu si o ramura in ServiciuFactory
+- Adaugarea unui nou tip de exceptie inseamna derivarea din SalonExceptii
+- Catalog<T> functioneaza pentru orice tip T fara modificare - Client, Angajat si Programare.
+
+L - Liskov Substitution Principle (derivatele pot inlocui baza):
+- In Programare, shared_ptr<Serviciu> poate fi orice tip. Apelurile calcPretFinal, durataTotala, descriereServiciu functioneaza identic indiferent de tipul concret.
+- Idiomul NVI (afiseaza public non-virtual care apeleaza afiseazaVirtual virtual) asigura ca operator << pe orice Persoana functioneaza corect pentru Client sau Angajat.
+
+I - Interface Segregation Principle (interfete focusate, fara metode inutile):
+- Serviciu are exact 4 metode virtuale pure - toate sunt apelate de Programare, nicio metoda nu este nefolosita
+- Persoana are doar afiseazaVirtual
+- Nu am o interfata pe care derivatele sa fie obligate sa o implementeze chiar daca nu o folosesc
+
+D - Dependency Inversion Principle (depinde de abstractii, nu de detalii de implementare):
+- Programare depinde de abstractia Serviciu (prin shared_ptr<Serviciu>), nu de Coafor/Cosmetica direct
+- ServiciuFactory returneaza shared_ptr<Serviciu> (abstractie); apelantul nu stie ce derivata primeste concret
+- Catalog<T>::cauta(predicat) accepta orice lambda, deci nu depinde de o functie concreta
+- main.cpp nu lucreaza cu vector<Coafor>, vector<Cosmetica>, ci lucreaza cu Catalog<...>
 
 
 ## Bibliografie
