@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <optional>
 #include "Exceptii.h"                 //pt EntitateInexistentaExceptie<T>
 
 
@@ -11,14 +12,18 @@ template <typename T>
 class Catalog{
 private:
     std::vector<T> items;              //vector care retine toate obiectele din catalog, iar tipul elementelor depinde de T
-
+                                       //atribut care depinde de T
+    std::optional<T> ultimAdaugat;
 
 
 public:
     Catalog() = default;                //constructor
 
-    //functii care depind de T
-    void adauga(const T& item){ items.push_back(item); }    //adauga un element nou in catalog
+    //functii membre care depind de T
+    void adauga(const T& item){                                 //adauga un element nou in catalog
+        items.push_back(item);
+        ultimAdaugat = item;
+    }
     size_t numar() const { return items.size(); }           //returneaza nr de elemente din catalog
     bool gol() const { return items.empty(); }              //verifica daca vectorul este gol
 
@@ -40,8 +45,9 @@ public:
     }
 
     const std::vector<T>& toate() const{ return items;}        //returneaza vectorul intern al catalogului
+    const std::optional<T>& getUltimAdaugat() const{return ultimAdaugat; }
 
-    //functie template
+    //functii template
     //Predicat = functie/lambda care intoarce true sau false
     template <typename Predicat>
     T& cauta(Predicat p, const std::string& criteriu = ""){            //cauta un element care respecta o anumita conditie
@@ -66,6 +72,7 @@ public:
         return std::any_of(items.begin(), items.end(), p);
     }
 
+    //functie libera template - friend
     friend std::ostream& operator<<(std::ostream& os, const Catalog<T>& c){         //operator <<
         os<< "=== Catalog cu " << c.items.size() << " elemente ===\n";
         for(const auto& it : c.items){

@@ -42,7 +42,7 @@ std::shared_ptr<Serviciu> ServiciuFactory::creeazaDinFisier(const std::string& t
         iss>> masca >> tipTratament;
         return std::make_shared<Cosmetica>(pret, durata, masca, tipTratament);
     }
-
+    throw ProgramareInvalidaExceptie("tip serviciu invalid: " + tipServiciu);
 }
 
 
@@ -87,5 +87,6 @@ std::shared_ptr<Serviciu> ServiciuFactory::creeazaInteractiv(const std::string& 
         std::cout<< "Tip tratament: ";
         std::cin >> tipTratament;
         return std::make_shared<Cosmetica>(pret, durata, masca, tipTratament);
-}
+    }
+    throw ProgramareInvalidaExceptie("tip serviciu invalid: " + tipServiciu);
 }

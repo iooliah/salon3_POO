@@ -23,7 +23,7 @@ public:
     float pretFix(const std::string& tipServiciu) const;
     int durataFixa(const std::string& tipServiciu) const;
 
-    //adaug data aniversara si si reducerea aplicata pt mai multe programari in aceeasi zi (>=2)
+    //adaug data aniversara (11.09) si si reducerea aplicata pt mai multe programari in aceeasi zi (>=2)
     const std::string& dataAniversara() const;
     float reducereAniversara() const;
     float reducereProgramariMultiple() const;

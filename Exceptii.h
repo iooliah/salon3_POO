@@ -39,7 +39,6 @@ template <typename T>
 class EntitateInexistentaExceptie : public SalonExceptii{
 private:
     std::string criteriu_;
-    std::vector<T> sugestii_;       //atribut dependent de T
 
 public:
     //construiesc mesajul exceptiei in functie de tipul T
@@ -48,12 +47,7 @@ public:
     const std::string& getCriteriu() const{
         return criteriu_;
     }
-    const std::vector<T>& getSugestii() const{         //functie membru care depinde de T
-        return sugestii_;
-    }
-    int numarSugestii() const{
-        return static_cast<int>(sugestii_.size());
-    }
+
 };
 
 //pastrez numele vechi din proiect
