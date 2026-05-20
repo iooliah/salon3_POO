@@ -41,7 +41,7 @@ Const: toate metodele care nu modifica starea sunt const (getters, calcule, afis
 
 Clase template adaugate:
 * EntitateInexistentaExceptie<T> (in Exceptii.h) - transformarea unei clase existente, izolata. A inlocuit ClientInexistentExceptie si AngajatInexistentExceptie care erau aproape identice. Clasa retine criteriul cautat prin atributul std::string criteriu_, iar mesajul exceptiei este construit in functie de tipul T, folosind functia libera template numeEntitate<T>(), specializata pentru Client, Angajat si Programare. Numele vechi sunt pastrate prin alias cu "using".
-* Catalog<T> (in Catalog.h) - container pentru clienti/angajati/programari.  Inlocuieste folosirea directa a mai multor std::vector din main. Are atribut dependent de T: std::vector<T> items. Metoda adauga(const T& item) adauga un element si actualizeaza ultimul element adaugat si metoda ultimul imi cauta ultimul element din catalog. Metodele template cauta, filtreaza si exista folosesc predicate/lambda pentru cautare si filtrare. Clasa are si operator<< definit ca functie friend pentru afisarea intregului catalog.
+* Catalog<T> (in Catalog.h) - container pentru clienti/angajati/programari. Inlocuieste folosirea directa a mai multor std::vector din main. Are atribut dependent de T: std::vector<T> items. Metoda adauga(const T& item) adauga un element si metoda ultimul imi cauta ultimul element din catalog. Metodele template cauta, filtreaza si exista folosesc predicate/lambda pentru cautare si filtrare. Clasa are si operator<< definit ca functie friend pentru afisarea intregului catalog.
 
 Design patterns folosite:
 * Singleton: SalonSingleton - configurarile salonului (preturi, durate, data aniversara)
@@ -137,4 +137,3 @@ D - Dependency Inversion Principle (depinde de abstractii, nu de detalii de impl
 - https://refactoring.guru/design-patterns                (design patterns)
 - https://en.cppreference.com/w/cpp/utility/optional      (pentru std::optional)
 - https://www.geeksforgeeks.org/cpp/templates-cpp/        (pentru templates)
-
