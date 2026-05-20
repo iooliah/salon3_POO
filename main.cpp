@@ -282,18 +282,13 @@ int main()
         std::cout<< "\nTotal clienti: "<< Client::getNrClienti() <<std::endl;
         std::cout<< "Total angajati: "<< Angajat::getNrAngajati() <<std::endl;
 
-        if(clienti.getUltimAdaugat()){
-            std::cout<< "\nUltimul client adaugat:\n";
-            std::cout<< *clienti.getUltimAdaugat() <<std::endl;
-        }else{
-            std::cout<< "\nNu exista clienti in catalog.\n";
+        if(clienti.ultimul()){
+            std::cout<< "\nUltimul client:\n";
+            std::cout<< *clienti.ultimul() <<std::endl;
         }
-
-        if(programari.getUltimAdaugat()){
-            std::cout<< "\nUltima programare adaugata:\n";
-            std::cout<< *programari.getUltimAdaugat() <<std::endl;
-        }else{
-            std::cout<< "\nNu exista programari in catalog.\n";
+        if(programari.ultimul()){
+            std::cout<< "\nUltima programare:\n";
+            std::cout<< *programari.ultimul() <<std::endl;
         }
 
     }

@@ -18,3 +18,4 @@ Borosici Elisa Georgescu Mihnea PEDICHIURA 11.06 12:30 CARD 1 1 1
 Enescu Ema Ionescu Vlad COAFOR 11.06 13:00 TRANSFER 1 lung
 Barbu Victoria Marin Andreea COSMETICA 11.06 13:30 CARD 1 corp
 Enescu Ema Popa Raluca MANICHIURA 11.09 10 CARD
+Rosca Oscar Marin Andreea COSMETICA 11.07 10:00 CARD

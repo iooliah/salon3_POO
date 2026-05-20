@@ -28,7 +28,7 @@ std::dynamic_pointer_cast cu sens: Programare::areServiciuCuTimpSuplimentar() fa
 
 Exceptii - ierarhie proprie: SalonExceptii cu trei specializari distincte: ClientInexistentExceptie, AngajatInexistentExceptie, ProgramareInvalidaExceptie.
 
-Date si functii statice: Client::numarClienti si Angajat::numarAngajati, Programare::calcIncasariZi, Programare::numaraProgramariClientZi, Programare::esteAcelasiClient.
+Date si functii statice: Client::numarClienti si Angajat::numarAngajati (care intorc numarul actual de clienti/angajati din fisier), Programare::calcIncasariZi (calculeaza suma totala castigata de salon intr-o zi specifica), Programare::numaraProgramariClientZi (verifica daca acelasi client a facut mai multe programari in aceeasi zi), Programare::esteAcelasiClient.
 
 operator<<: definit ca friend in Persoana, Serviciu si Programare. In Persoana/Serviciu apeleaza interfata non-virtuala.
 
@@ -41,7 +41,7 @@ Const: toate metodele care nu modifica starea sunt const (getters, calcule, afis
 
 Clase template adaugate:
 * EntitateInexistentaExceptie<T> (in Exceptii.h) - transformarea unei clase existente, izolata. A inlocuit ClientInexistentExceptie si AngajatInexistentExceptie care erau aproape identice. Clasa retine criteriul cautat prin atributul std::string criteriu_, iar mesajul exceptiei este construit in functie de tipul T, folosind functia libera template numeEntitate<T>(), specializata pentru Client, Angajat si Programare. Numele vechi sunt pastrate prin alias cu "using".
-* Catalog<T> (in Catalog.h) - container pentru clienti/angajati/programari.  Inlocuieste folosirea directa a mai multor std::vector din main. Are atribute dependente de T: std::vector<T> items si std::optional<T> ultimAdaugat. Metoda adauga(const T& item) adauga un element si actualizeaza ultimul element adaugat. Metodele template cauta, filtreaza si exista folosesc predicate/lambda pentru cautare si filtrare. Clasa are si operator<< definit ca functie friend pentru afisarea intregului catalog.
+* Catalog<T> (in Catalog.h) - container pentru clienti/angajati/programari.  Inlocuieste folosirea directa a mai multor std::vector din main. Are atribut dependent de T: std::vector<T> items. Metoda adauga(const T& item) adauga un element si actualizeaza ultimul element adaugat si metoda ultimul imi cauta ultimul element din catalog. Metodele template cauta, filtreaza si exista folosesc predicate/lambda pentru cautare si filtrare. Clasa are si operator<< definit ca functie friend pentru afisarea intregului catalog.
 
 Design patterns folosite:
 * Singleton: SalonSingleton - configurarile salonului (preturi, durate, data aniversara)
@@ -81,7 +81,7 @@ Proiectul 3 a presupus mai multe schimbari ale codului, nu doar adaugari. Cerint
 Pentru partea de template, am ales sa transform clasele de exceptii ClientInexistentExceptie si AngajatInexistentExceptie intr-o singura clasa template, EntitateInexistentaExceptie<T>. Aceasta a fost cea mai potrivita clasa pentru transformare, pentru ca era izolata,fiind folosita doar in throw si catch, fara dependente complexe de restul codului. Cele doua clase originale erau extrem de asemanatoare, doar mesajele erau putin diferite ("Client inexistent" si "Angajat inexistent"). Am pastrat numele vechi ca alias (using ClientInexistentExceptie = EntitateInexistentaExceptie<Client>) ca sa nu fiu nevoita sa modific in fiecare loc unde se aruncau aceste exceptii.
 Clasa template are o functie libera template numeEntitate<T>() cu diverse mesaje particulare pentru Client, Angajat si Programare. Specializarile sunt cele care personalizeaza mesajul exceptiei in functie de tipul cautat: pentru Client mesajul devine "Nu exista client:...", pentru Angajat "Nu exista angajat:....".
 
-A doua clasa template este Catalog<T>. Aceasta inlocuieste folosirea directa a std::vector<Client>, std::vector<Angajat> si std::vector<Programare> din main. Catalog<T> are un atribut std::vector<T> items si metode template membru pentru cautare si filtrare cu lambda ca predicat. Operatorul << este definit ca friend in interiorul clasei, ceea ce inseamna ca fiecare instantiere de Catalog<T> are propria versiune generata de compilator.
+A doua clasa template este Catalog<T>. Aceasta inlocuieste folosirea directa a std::vector<Client>, std::vector<Angajat> si std::vector<Programare> din main. Catalog<T> are un atribut std::vector<T> items si metode template membru pentru cautare si filtrare cu lambda ca predicat. Cum am scris si mai sus, am creat doua metode, "adauga" si "ultimul", cu scopul de a putea adauga elemente noi, respectiv de a accesa ultimul element din catalog. Operatorul << este definit ca friend pentru a permite afisarea directa a obiectelor de tip Catalog<T>.
 
 Pentru design patterns, am implementat trei exemple:
 

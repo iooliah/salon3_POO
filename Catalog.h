@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <optional>
 #include "Exceptii.h"                 //pt EntitateInexistentaExceptie<T>
 
 
@@ -13,8 +12,6 @@ class Catalog{
 private:
     std::vector<T> items;              //vector care retine toate obiectele din catalog, iar tipul elementelor depinde de T
                                        //atribut care depinde de T
-    std::optional<T> ultimAdaugat;
-
 
 public:
     Catalog() = default;                //constructor
@@ -22,7 +19,12 @@ public:
     //functii membre care depind de T
     void adauga(const T& item){                                 //adauga un element nou in catalog
         items.push_back(item);
-        ultimAdaugat = item;
+    }
+    const T* ultimul() const{                                   //imi spune care este ultimul element
+        if(items.empty()){
+            return nullptr;
+        }
+        return &items.back();
     }
     size_t numar() const { return items.size(); }           //returneaza nr de elemente din catalog
     bool gol() const { return items.empty(); }              //verifica daca vectorul este gol
@@ -45,7 +47,6 @@ public:
     }
 
     const std::vector<T>& toate() const{ return items;}        //returneaza vectorul intern al catalogului
-    const std::optional<T>& getUltimAdaugat() const{return ultimAdaugat; }
 
     //functii template
     //Predicat = functie/lambda care intoarce true sau false
@@ -71,6 +72,7 @@ public:
     bool exista(Predicat p) const{                           //verifica daca exista macar un element care respecta conditia cu ajutorul lui any_of
         return std::any_of(items.begin(), items.end(), p);
     }
+
 
     //functie libera template - friend
     friend std::ostream& operator<<(std::ostream& os, const Catalog<T>& c){         //operator <<
