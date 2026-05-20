@@ -72,7 +72,7 @@ Polimorfismul a fost o alta schimbare. In clasa Programare, atributul serviciu e
 
 dynamic_pointer_cast a fost folosit cu un scop concret: metoda areServiciuCuTimpSuplimentar() din Programare verifica daca serviciul ales are optiuni extra(vopsit, gel, masaj etc.) prin downcast la fiecare derivata. Daca o derivata are activata vreo optiune care necesita timp suplimentar fata de durata de baza, metoda intoarce true.
 
-In sfarsit, am construit o ierarhie proprie de exceptii: SalonExceptii este clasa de baza care foloseste std::runtime_error, iar ClientInexistentExceptie, AngajatInexistentExceptie si ProgramareInvalidaExceptie sunt derivate care trateaza categorii distincte de erori si, de asmenea, am schimbat meniul interactiv.
+De asemenea, am construit o ierarhie proprie de exceptii: SalonExceptii este clasa de baza care foloseste std::runtime_error, iar ClientInexistentExceptie, AngajatInexistentExceptie si ProgramareInvalidaExceptie sunt derivate care trateaza categorii distincte de erori si, de asmenea, am schimbat meniul interactiv.
 
 ### Proiectul 3 (templates si design patterns)
 
@@ -130,11 +130,11 @@ D - Dependency Inversion Principle (depinde de abstractii, nu de detalii de impl
 
 ## Bibliografie
 
--Curs si laborator POO 
--https://github.com/mcmarius/poo 
--https://codesignal.com/learn/courses/fundamentals-of-text-data-manipulation-in-cpp/lessons/writing-text-files-in-cpp (pentru a invata cum sa fac update din program fisierelor 'txt')
--https://www.geeksforgeeks.org/cpp/stringstream-c-applications/   (pentru a putea rezolva o eroare ce tinea de citirea programarilor)
--https://refactoring.guru/design-patterns                (design patterns)
--https://en.cppreference.com/w/cpp/utility/optional      (pentru std::optional)
--https://www.geeksforgeeks.org/cpp/templates-cpp/        (pentru templates)
+- Curs si laborator POO 
+- https://github.com/mcmarius/poo 
+- https://codesignal.com/learn/courses/fundamentals-of-text-data-manipulation-in-cpp/lessons/writing-text-files-in-cpp (pentru a invata cum sa fac update din program fisierelor 'txt')
+- https://www.geeksforgeeks.org/cpp/stringstream-c-applications/   (pentru a putea rezolva o eroare ce tinea de citirea programarilor)
+- https://refactoring.guru/design-patterns                (design patterns)
+- https://en.cppreference.com/w/cpp/utility/optional      (pentru std::optional)
+- https://www.geeksforgeeks.org/cpp/templates-cpp/        (pentru templates)
 

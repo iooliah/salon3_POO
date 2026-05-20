@@ -180,7 +180,7 @@
 	<string>
 	<vector>
 
-1778959206 source:d:\facultate\an 1\sem 2\poo\proiect3\main.cpp
+1779194215 source:d:\facultate\an 1\sem 2\poo\proiect3\main.cpp
 	<iostream>
 	<fstream>
 	<sstream>
@@ -195,17 +195,18 @@
 	"ServiciuFactory.h"
 	"ProgramareBuilder.h"
 
-1778958557 d:\facultate\an 1\sem 2\poo\proiect3\catalog.h
+1779194101 d:\facultate\an 1\sem 2\poo\proiect3\catalog.h
 	<vector>
 	<algorithm>
 	<iostream>
 	<string>
+	<optional>
 	"Exceptii.h"
 
 1779093841 d:\facultate\an 1\sem 2\poo\proiect3\salonsingleton.h
 	<string>
 
-1778930001 d:\facultate\an 1\sem 2\poo\proiect3\serviciufactory.h
+1779300769 d:\facultate\an 1\sem 2\poo\proiect3\serviciufactory.h
 	<memory>
 	<string>
 	<sstream>
@@ -227,7 +228,7 @@
 	"ProgramareBuilder.h"
 	"Exceptii.h"
 
-1778958593 source:d:\facultate\an 1\sem 2\poo\proiect3\serviciufactory.cpp
+1779089148 source:d:\facultate\an 1\sem 2\poo\proiect3\serviciufactory.cpp
 	"ServiciuFactory.h"
 	"SalonSingleton.h"
 	"Manichiura.h"

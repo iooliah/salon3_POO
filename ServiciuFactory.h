@@ -6,8 +6,8 @@
 #include "Serviciu.h"
 
 //SOLID:
-//  -S: Single Responsibility: factory face un singur lucru, nu mai multe
-//  -O: Open/Closed: extensibil prin adaugarea de noi tipuri fara a modifica main
+//  S: Single Responsibility: factory face un singur lucru, nu mai multe
+//  O: Open/Closed: extensibil prin adaugarea de noi tipuri fara a modifica main
 
 class ServiciuFactory{
 public:
