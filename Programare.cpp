@@ -4,6 +4,7 @@
 #include "Pedichiura.h"
 #include "Unghii.h"
 #include "Coafor.h"
+#include "SalonSingleton.h"
 
 Programare::Programare(const Client& client, const Angajat& angajat, std::shared_ptr<Serviciu> serviciu, const std::string& data, const std::string& ora, plata tipPlata)
 : client(client), angajat(angajat), serviciu(serviciu), data(data), ora(ora), tipPlata(tipPlata){}   //constructor
@@ -68,11 +69,13 @@ float Programare::calcCostFinal(const std::vector<Programare>& toateProgramarile
     float cost = serviciu->calcPretFinal(angajatExperimentat, tipPlata, clientFidel);           //apelare virtuala prin pointer la clasa de baza
     int nrProgramariZi = numaraProgramariClientZi(toateProgramarile, client, data);
 
-    if(data == "11.09"){                    //10% reducere in data de 11 septembrie (ziua deschiderii)
-        cost = cost* 0.9f;
+    const auto& configurare = SalonSingleton::getInstance();
+
+    if(data == configurare.dataAniversara()){                                            //folosesc din SalonSingleton
+        cost = cost * configurare.reducereAniversara();
     }
-    if(nrProgramariZi >= 2){                //10% reducere daca clientul are mai mult de 2 programari/zi
-        cost = cost* 0.9f;
+    if(nrProgramariZi >= configurare.pragProgramariMultiple()){
+        cost = cost * configurare.reducereProgramariMultiple();
     }
     return cost;
 }

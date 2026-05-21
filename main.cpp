@@ -39,7 +39,7 @@ void citesteAngajati(Catalog<Angajat>& angajati, const std::string& fis){
     }
 }
 
-//citire programari din fisier
+//citire programari din fisier - factory si builder
 void citesteProgramari(Catalog<Programare>& programari, Catalog<Client>& clienti, Catalog<Angajat>& angajati, const std::string& fis){
     std::ifstream fin(fis);
     std::string linie;
@@ -133,6 +133,7 @@ void adaugaClient(Catalog<Client>& clienti){
     std::cout<< "Client adaugat.\n";
 }
 
+//factory
 void adaugaProgramare(Catalog<Programare>& programari, Catalog<Client>& clienti, Catalog<Angajat>& angajati){
     std::string numeClient, prenumeClient;
     std::string numeAngajat, prenumeAngajat;
@@ -161,7 +162,7 @@ void adaugaProgramare(Catalog<Programare>& programari, Catalog<Client>& clienti,
         throw ProgramareInvalidaExceptie("angajatul nu are specializarea potrivita");
     }
 
-    auto serviciu = ServiciuFactory::creeazaInteractiv(tipServiciu);        //factory interactiv
+    auto serviciu = ServiciuFactory::creeazaInteractiv(tipServiciu);         //factory interactiv
 
     std::cout<< "Data: ";
     std::cin>> data;
